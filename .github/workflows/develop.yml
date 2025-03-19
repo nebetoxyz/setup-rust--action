@@ -1,0 +1,50 @@
+name: develop
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/**
+      - fix/**
+      - docs/**
+      - ci/**
+      - chore/**
+      - test/**
+      - perf/**
+      - refactor/**
+      - revert/**
+      - style/**
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    name: Create a Pull Request
+    steps:
+      - id: checkout-code
+        name: Checkout code
+        uses: actions/checkout@v4
+      - id: create-or-get-existing-draft-pull-request
+        name: Create or get an existing draft Pull Request on Github
+        uses: nebetoxyz/create-pull-request--action@v1
+  check-testing:
+    runs-on: ubuntu-latest
+    name: Check testing
+    needs: create-pull-request
+    strategy:
+      matrix:
+        cache: ["", "cargo"]
+    steps:
+      - id: setup-rust
+        name: Setup Rust
+        uses: nebetoxyz/setup-rust--action@${{ github.ref_name }}
+        with:
+          cache: ${{ matrix.cache }}
+      - id: "test"
+        name: "Test"
+        run: |
+          rustc --version
+          cargo --version

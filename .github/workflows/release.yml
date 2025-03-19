@@ -1,0 +1,23 @@
+name: release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: Release
+    steps:
+      - id: release
+        name: Release
+        uses: googleapis/release-please-action@v4
+        with:
+          release-type: simple
