@@ -40,7 +40,7 @@ jobs:
     steps:
       - id: setup-rust
         name: Setup Rust
-        uses: nebetoxyz/setup-rust--action@${{ github.ref_name }}
+        uses: nebetoxyz/setup-rust--action@main
         with:
           cache: ${{ matrix.cache }}
       - id: "test"
