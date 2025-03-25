@@ -10,7 +10,7 @@ Works **ONLY** with [Github Action](https://github.com/features/actions).
   uses: nebetoxyz/setup-rust--action@v1
   with:
     # Used to specify a package manager for caching in the default directory.
-    # Supported value : cargo
+    # Supported values : cargo
     cache: "cargo"
 ```
 
