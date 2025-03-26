@@ -31,7 +31,9 @@ runs:
     - id: "setup-environment"
       name: "Setup environment"
       shell: bash
-      run: echo "PATH="$PATH"" >> "$GITHUB_ENV"
+      run: |
+        . "$HOME/.cargo/env"
+        echo "PATH="$PATH"" >> "$GITHUB_ENV"
     - id: "setup-cache"
       if: ${{ inputs.cache == 'cargo' }}
       uses: actions/cache@v4
