@@ -1,0 +1,53 @@
+name: "Setup Rust"
+description: "Setup Rust, including rustc and cargo"
+author: "Nebeto"
+
+branding:
+  icon: "package"
+  color: "black"
+
+inputs:
+  cache:
+    description: "Used to specify a package manager for caching in the default directory. Supported values: cargo."
+    required: false
+
+defaults:
+  run:
+    shell: bash
+
+runs:
+  using: "composite"
+  steps:
+    - id: "download-installer"
+      name: "Download installer"
+      shell: bash
+      run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > installer.sh
+    - id: "execute-installer"
+      name: "Execute installer"
+      shell: bash
+      run: |
+        chmod u+x installer.sh
+        ./installer.sh -y --profile minimal
+    - id: "setup-environment"
+      name: "Setup environment"
+      shell: bash
+      run: |
+        . "$HOME/.cargo/env"
+        echo "PATH="$PATH"" >> "$GITHUB_ENV"
+    - id: "setup-cache"
+      if: ${{ inputs.cache == 'cargo' }}
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+    - id: "check-installation"
+      name: "Check installation"
+      shell: bash
+      run: |
+        rustc --version
+        cargo --version
