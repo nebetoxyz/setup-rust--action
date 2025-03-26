@@ -18,6 +18,6 @@ jobs:
     steps:
       - id: release
         name: Release
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@v4.2.0
         with:
           release-type: simple
