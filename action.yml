@@ -20,9 +20,11 @@ runs:
   steps:
     - id: "download-installer"
       name: "Download installer"
+      shell: bash
       run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > installer.sh
     - id: "execute-installer"
       name: "Execute installer"
+      shell: bash
       run: |
         chmod u+x installer.sh
         ./installer.sh -y --profile minimal
