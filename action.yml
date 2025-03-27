@@ -11,14 +11,17 @@ inputs:
     description: "Used to specify a package manager for caching in the default directory. Supported values: cargo."
     required: false
 
-defaults:
-  run:
-    shell: bash
-
 runs:
   using: "composite"
   steps:
+    - id: "setup-cache-installer"
+      name: "Setup cache for installer"
+      uses: actions/cache@v4.2.3
+      with:
+        path: installer.sh
+        key: ${{ runner.os }}-rust-installer
     - id: "download-installer"
+      if: ${{ steps.restore-installer-from-cache.outputs.cache-hit != 'true' }}
       name: "Download installer"
       shell: bash
       run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > installer.sh
@@ -35,8 +38,8 @@ runs:
         . "$HOME/.cargo/env"
         echo "PATH="$PATH"" >> "$GITHUB_ENV"
     - id: "setup-cache"
-      if: ${{ inputs.cache == 'cargo' }}
-      uses: actions/cache@v4
+      if: ${{ inputs.cache == 'cargo' && hashFiles('**/Cargo.lock') != '' }}
+      uses: actions/cache@v4.2.3
       with:
         path: |
           ~/.cargo/bin/
