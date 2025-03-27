@@ -19,7 +19,7 @@ runs:
       uses: actions/cache@v4.2.3
       with:
         path: installer.sh
-        key: ${{ runner.os }}-installer
+        key: ${{ runner.os }}-rust-installer
     - id: "download-installer"
       if: ${{ steps.restore-installer-from-cache.outputs.cache-hit != 'true' }}
       name: "Download installer"
