@@ -12,6 +12,9 @@ Works **ONLY** with [Github Action](https://github.com/features/actions).
     # Used to specify a package manager for caching in the default directory.
     # Supported values : cargo
     cache: "cargo"
+    # Used to specify components to install.
+    # Supported values : rustfmt, rust-docs, rust-analyzer, clippy, llvm-tools.
+    components: "rustfmt,rust-docs,rust-analyzer,clippy,llvm-tools"
 ```
 
 ## Samples
@@ -30,6 +33,15 @@ Works **ONLY** with [Github Action](https://github.com/features/actions).
   uses: nebetoxyz/setup-rust--action@v1.1.0
   with:
     cache: "cargo"
+```
+
+### Setup Rust with [LLVM](https://llvm.org/) component for [coverage](https://doc.rust-lang.org/beta/rustc/instrument-coverage.html)
+
+```yaml
+- id: setup-rust
+  uses: nebetoxyz/setup-rust--action@v1.1.0
+  with:
+    components: "llvm-tools"
 ```
 
 ## Contact

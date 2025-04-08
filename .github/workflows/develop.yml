@@ -44,6 +44,7 @@ jobs:
     strategy:
       matrix:
         cache: ["", "cargo"]
+        components: ["", "rustfmt,rust-docs,rust-analyzer,clippy,llvm-tools"]
     steps:
       - id: checkout-code
         name: Checkout code
@@ -55,6 +56,7 @@ jobs:
         uses: ./
         with:
           cache: ${{ matrix.cache }}
+          components: ${{ matrix.components }}
       - id: test
         name: Test
         run: |
