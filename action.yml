@@ -34,12 +34,6 @@ runs:
       run: |
         chmod u+x installer.sh
         ./installer.sh -y --profile minimal
-    - id: "setup-environment"
-      name: "Setup environment"
-      shell: bash
-      run: |
-        . "$HOME/.cargo/env"
-        echo "PATH="$PATH"" >> "$GITHUB_ENV"
     - id: "setup-cache"
       if: ${{ inputs.cache == 'cargo' && hashFiles('**/Cargo.lock') != '' }}
       name: "Setup cache for Cargo"
@@ -57,15 +51,20 @@ runs:
       name: "Setup components"
       shell: bash
       run: |
-        components=(${inputs.components//,/ })
+        components=${inputs.components//,/ }
 
         for component in "${components[@]}"; do
           rustup component add "$component"
         done
+    - id: "setup-environment"
+      name: "Setup environment"
+      shell: bash
+      run: |
+        . "$HOME/.cargo/env"
+        echo "PATH="$PATH"" >> "$GITHUB_ENV"
     - id: "debug-installation"
       name: "Debug installation"
       shell: bash
       run: |
         rustc --version
         cargo --version
-        rust-std --version

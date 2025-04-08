@@ -66,4 +66,3 @@ jobs:
         run: |
           rustc --version
           cargo --version
-          rust-std --version
