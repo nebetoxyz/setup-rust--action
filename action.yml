@@ -11,7 +11,7 @@ inputs:
     description: "Used to specify a package manager for caching in the default directory. Supported values: cargo."
     required: false
   components:
-    description: "Used to specify components to install. Supported values: rustfmt, rust-docs, rust-analyzer, clippy, rust-mingw, llvm-tools."
+    description: "Used to specify components to install. Supported values: rustfmt, rust-docs, rust-analyzer, clippy, llvm-tools."
     required: false
 
 runs:
