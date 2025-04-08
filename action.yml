@@ -10,6 +10,9 @@ inputs:
   cache:
     description: "Used to specify a package manager for caching in the default directory. Supported values: cargo."
     required: false
+  components:
+    description: "Used to specify components to install. Supported values: rustfmt, rust-docs, rust-analyzer, clippy, miri, rust-mingw, llvm-tools."
+    required: false
 
 runs:
   using: "composite"
@@ -39,6 +42,7 @@ runs:
         echo "PATH="$PATH"" >> "$GITHUB_ENV"
     - id: "setup-cache"
       if: ${{ inputs.cache == 'cargo' && hashFiles('**/Cargo.lock') != '' }}
+      name: "Setup cache for Cargo"
       uses: actions/cache@v4.2.3
       with:
         path: |
@@ -48,9 +52,20 @@ runs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - id: "check-installation"
-      name: "Check installation"
+    - id: "setup-components"
+      if: ${{ inputs.components != '' }}
+      name: "Setup components"
+      shell: bash
+      run: |
+        components=(${inputs.components//,/ })
+
+        for component in "${components[@]}"; do
+          rustup component add "$component"
+        done
+    - id: "debug-installation"
+      name: "Debug installation"
       shell: bash
       run: |
         rustc --version
         cargo --version
+        rust-std --version
