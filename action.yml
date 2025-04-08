@@ -52,7 +52,7 @@ runs:
       shell: bash
       run: |
         components=${{ inputs.components }}
-        components=${components//,/ }
+        components=(${components//,/ })
 
         for component in "${components[@]}"; do
           rustup component add "$component"
