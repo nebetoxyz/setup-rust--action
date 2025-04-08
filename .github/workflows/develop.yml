@@ -45,10 +45,7 @@ jobs:
       matrix:
         cache: ["", "cargo"]
         components:
-          [
-            "",
-            "rustfmt,rust-docs,rust-analyzer,clippy,miri,rust-mingw,llvm-tools",
-          ]
+          ["", "rustfmt,rust-docs,rust-analyzer,clippy,rust-mingw,llvm-tools"]
     steps:
       - id: checkout-code
         name: Checkout code
