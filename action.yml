@@ -51,7 +51,8 @@ runs:
       name: "Setup components"
       shell: bash
       run: |
-        components=${inputs.components//,/ }
+        components=${{ inputs.components }}
+        components=${components//,/ }
 
         for component in "${components[@]}"; do
           rustup component add "$component"
