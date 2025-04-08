@@ -7,7 +7,7 @@ Works **ONLY** with [Github Action](https://github.com/features/actions).
 
 ```yaml
 - id: setup-rust
-  uses: nebetoxyz/setup-rust--action@v1.1.0
+  uses: nebetoxyz/setup-rust--action@v1.2.0
   with:
     # Used to specify a package manager for caching in the default directory.
     # Supported values : cargo
@@ -23,14 +23,14 @@ Works **ONLY** with [Github Action](https://github.com/features/actions).
 
 ```yaml
 - id: setup-rust
-  uses: nebetoxyz/setup-rust--action@v1.1.0
+  uses: nebetoxyz/setup-rust--action@v1.2.0
 ```
 
 ### Setup Rust with cache on Cargo dependencies
 
 ```yaml
 - id: setup-rust
-  uses: nebetoxyz/setup-rust--action@v1.1.0
+  uses: nebetoxyz/setup-rust--action@v1.2.0
   with:
     cache: "cargo"
 ```
@@ -39,7 +39,7 @@ Works **ONLY** with [Github Action](https://github.com/features/actions).
 
 ```yaml
 - id: setup-rust
-  uses: nebetoxyz/setup-rust--action@v1.1.0
+  uses: nebetoxyz/setup-rust--action@v1.2.0
   with:
     components: "llvm-tools"
 ```
