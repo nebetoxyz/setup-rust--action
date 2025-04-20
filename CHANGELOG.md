@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/nebetoxyz/setup-rust--action/compare/v1.2.0...v1.3.0) (2025-04-20)
+
+
+### Features
+
+* update action name ([5ed8356](https://github.com/nebetoxyz/setup-rust--action/commit/5ed835610ba19fa7a60a276d782a32ea3c4f0172))
+
 ## [1.2.0](https://github.com/nebetoxyz/setup-rust--action/compare/v1.1.0...v1.2.0) (2025-04-08)
 
 
