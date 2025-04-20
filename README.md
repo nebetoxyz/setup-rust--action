@@ -1,4 +1,4 @@
-# Setup Rust
+# Setup Rust & Toolchain
 
 Action to install and configure Rust in a Github Action workflow.
 Works **ONLY** with [Github Action](https://github.com/features/actions).
