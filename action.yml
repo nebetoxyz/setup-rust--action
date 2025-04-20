@@ -1,4 +1,4 @@
-name: "Setup Rust"
+name: "Setup Rust & Toolchain"
 description: "Setup Rust, including rustc and cargo"
 author: "Nebeto"
 
